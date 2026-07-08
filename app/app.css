@@ -1,16 +1,159 @@
-@import "tailwindcss" source(".");
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
 
 @theme {
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --color-primary: #9F7B42;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #F6EFE3;
+  --color-on-primary-container: #523B17;
+
+  --color-secondary: #9F7B42;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #FAF9F6;
+  --color-on-secondary-container: #1C1D21;
+
+  --color-tertiary: #736E67;
+  --color-on-tertiary: #FFFFFF;
+  --color-tertiary-container: #F1EFF0;
+
+  --color-background: #FAF9F6;
+  --color-on-background: #1C1D21;
+
+  --color-surface: #FAF9F6;
+  --color-surface-dim: #F2F0E7;
+  --color-surface-bright: #FFFFFF;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F7F5EE;
+  --color-surface-container: #F0EDE4;
+  --color-surface-container-high: #E8E4D9;
+  --color-surface-container-highest: #DFDACB;
+
+  --color-on-surface: #1C1D21;
+  --color-on-surface-variant: #5F6066;
+  --color-outline: #8D8E96;
+  --color-outline-variant: #D5D3CC;
+
+  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+/* Base custom modifications */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-on-background);
+    font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
+}
+
+/* Dark mode variable overrides */
+.dark {
+  --color-primary: #C5A059;
+  --color-on-primary: #0A0B0C;
+  --color-primary-container: #8C6A30;
+  --color-on-primary-container: #E0E0E0;
+
+  --color-secondary: #C5A059;
+  --color-on-secondary: #0A0B0C;
+  --color-secondary-container: #202227;
+  --color-on-secondary-container: #E0E0E0;
+
+  --color-tertiary: #E5D5B8;
+  --color-on-tertiary: #302410;
+  --color-tertiary-container: #4D3B1E;
+
+  --color-background: #0A0B0C;
+  --color-on-background: #E0E0E0;
+
+  --color-surface: #0A0B0C;
+  --color-surface-dim: #050607;
+  --color-surface-bright: #202227;
+  --color-surface-container-lowest: #050607;
+  --color-surface-container-low: #0F1012;
+  --color-surface-container: #16181D;
+  --color-surface-container-high: #202227;
+  --color-surface-container-highest: #2B2E35;
+
+  --color-on-surface: #E0E0E0;
+  --color-on-surface-variant: #A0A5B0;
+  --color-outline: #6D727C;
+  --color-outline-variant: #34373E;
+}
+
+/* Glassmorphism custom components adjusted for Sophisticated Light & Dark */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(159, 123, 66, 0.12);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel-heavy {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(159, 123, 66, 0.2);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .glass-panel {
+  background: rgba(22, 24, 29, 0.65);
+  border: 1px solid rgba(197, 160, 89, 0.15);
+}
+
+.dark .glass-panel-heavy {
+  background: rgba(10, 11, 12, 0.88);
+  border: 1px solid rgba(197, 160, 89, 0.25);
+}
+
+/* Ambient glow custom classes */
+.ambient-glow-primary {
+  box-shadow: 0 4px 30px rgba(159, 123, 66, 0.04);
+}
+
+.ambient-glow-secondary {
+  box-shadow: 0 4px 30px rgba(159, 123, 66, 0.04);
+}
+
+.dark .ambient-glow-primary,
+.dark .ambient-glow-secondary {
+  box-shadow: 0 0 40px rgba(197, 160, 89, 0.05);
+}
+
+/* Custom styled scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-container-high);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-surface-container-highest);
+}
+
+/* Smooth active focus lines */
+.input-minimalist {
+  background: transparent;
+  border-bottom: 1px solid var(--color-outline-variant);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-minimalist:focus {
+  border: 1px solid var(--color-primary);
+  background: rgba(159, 123, 66, 0.02);
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 4px;
 }

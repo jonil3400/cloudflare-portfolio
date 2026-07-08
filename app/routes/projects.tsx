@@ -1,4 +1,4 @@
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/projects";
 import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
@@ -12,6 +12,6 @@ export function loader({ context }: Route.LoaderArgs) {
   return { message: context.cloudflare.env.VALUE_FROM_CLOUDFLARE };
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function Projects({ loaderData }: Route.ComponentProps) {
   return <></>;
 }
